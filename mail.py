@@ -1,13 +1,12 @@
-import assist_functions
 import List
 
 
 def process_input(command):
 	if command == 'exit':
-		assist_functions.greet_user()
+		greet_user()
 
 	elif command == 'help':
-		assist_functions.print_list_of_commands()
+		print_list_of_commands()
 
 	elif command == 'show_lists':
 		pass
@@ -38,9 +37,18 @@ def take_input():
 	command = input(">> ")
 	return command
 
+def greet_user():
+	print("Hello Stranger! This is a cutting-edge, console-based mail-list!\nType help, to see a list of commands.")
+
+def print_list_of_commands():
+	file = open("list_of_commands.txt", "r")
+	list_of_commands = file.read()
+	file.close()
+	print(list_of_commands)
+
 
 def main():
-	assist_functions.greet_user()
+	greet_user()
 	command = take_input()
 
 	while True:
