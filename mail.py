@@ -18,7 +18,9 @@ def process_input(command):
 		pass
 
 	elif command.startswith('create '):
-		pass
+		list_name = List.get_arguments(command, 1)
+		print("{} was created".format(list_name))
+		new_list = List.List(list_name)
 
 	elif command.startswith('search_email'):
 		pass
