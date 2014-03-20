@@ -1,46 +1,26 @@
 import json
-import sys
+import assist_functions
 
 class Person:
 	def __init__(self, name, email):
 		self.name = name
 		self.email = email
 
-	def search_email(self, email):
-		
 
 class List:
-	def __init__(self, list_name, identifier):
+	archive_filename = 'archive.txt'
+
+	def __init__(self, list_name):
 		self.list_name = list_name
-		self.identifier = identifier
 		self.create_list_file()
 		self.add_list_to_archive()
 
-	def show_lists(self):
-		
-		def read(self):
-			if(sys.argv) > 1:
-				file = open("lists.txt", "r")
-				print(file.read())
-			else:
-				print "No lists!"
-		
-		for arg in range(1,len(sys.argv)):
-		read(sys.argv[arg])
+	def create_list_file(self):
+		list_filename = assist_functions.get_valid_filename(self.list_name)
+		open(list_filename, "w").close()
 
-		
-
-	def show_list(self,identifier):
-		self.identifier = sys.argv
-
-		def read(self):
-			if(sys.argv) > 1:
-				file = open("lists.txt", "r")
-				print(file.read())
-			else:
-				print "No lists!"
-		
-		for arg in range(1,len(sys.argv)):
-		read(sys.argv[arg])
-
-
+	def add_list_to_archive(self):
+		index = assist_functions.get_index_of_new_line(self.archive_filename)
+		identifier = assist_functions.get_identifier(index)
+		entry = assist_functions.set_entry([identifier, self.list_name])
+		assist_functions.write_to_file(self.archive_filename, entry, "a")
