@@ -6,7 +6,7 @@ def process_input(command):
 		greet_user()
 
 	elif command == 'help':
-		print_list_of_commands()
+		assist_functions.print_list_of_commands()
 
 	elif command == 'show_lists':
 		pass
@@ -17,12 +17,21 @@ def process_input(command):
 	elif command.startswith('add '):
 		list_name = assist_functions.get_list_name_from_command(command)
 		new_person = add_person()
-		add_person_to_list_file(new_person, list_name)
+		assist_functions.add_person_to_list_file(new_person, list_name)
 
 	elif command.startswith('create '):
 		list_name = assist_functions.get_arguments(command, 1)
 		print("{} was created".format(list_name))
 		new_list = List.List(list_name)
+
+	elif command.startswith("update_subscriber"):
+		pass
+
+	elif command.startswith("remove_subscriber"):
+		pass
+
+	elif command.startswith("update "):
+		pass
 
 	elif command.startswith('search_email'):
 		pass
@@ -35,11 +44,10 @@ def process_input(command):
 	elif command.startswith('export'):
 		list_index = assist_functions.get_arguments(command, 1)
 		assist_functions.export(list_index)
-		
-update_subscriber <unique_list_identifier> <unique_name_identifier>
-* remove_subscriber <unique_list_identifier> <unique_name_identifier>
- update <unique_list_identifier>  <new_list_name>
- "import <filename"
+
+
+	elif command.startswith("import"):
+		pass
 
 	else:
 		pass
