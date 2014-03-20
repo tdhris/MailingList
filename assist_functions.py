@@ -1,5 +1,6 @@
 import List
 import json
+import os
 
 def get_valid_filename(list_name):
 	name = remove_spaces(list_name)
@@ -111,6 +112,67 @@ def get_person_from_list_entry(list_entry):
 	subscriber = List.Person(name.rstrip('\n'), email)
 	return subscriber
 
+def update_subscriber_info(list_index, subscriber_index, new_subscriber):
+	people_on_list = get_people_from_list(list_index)
+	subscriber = people_on_list[int(subscriber_index)-1]
+	subscriber.change_name(new_subscriber.name)
+	subscriber.change_email(new_subscriber.email)
+	clear_list(list_index)
+	list_name = get_list_from_archive(list_index)
+	for subscriber in people_on_list:
+		add_person_to_list_file(subscriber, list_name)
+
+def remove_subscriber(list_index, subscriber_index):
+	subscriber_index = int(subscriber_index)
+	subscribers = get_people_from_list(list_index)
+	subscriber_to_remove = subscribers[subscriber_index-1]
+	subscribers.remove(subscriber_to_remove)
+	clear_list(list_index)
+	list_name = get_list_from_archive(list_index)
+	for subscriber in subscribers:
+		add_person_to_list_file(subscriber, list_name)
+
+def change_list_name(list_index, new_list_name):
+	#creating file for new list
+	list_filename = get_valid_filename(new_list_name)
+	open(list_filename, "w").close()
+
+	old_list = get_list_from_archive(list_index)
+	copy_and_delete(old_list, new_list_name)
+	replace_list_in_archive(list_index, new_list_name)
+
+def copy_and_delete(list_to_copy, list_to_paste):
+	paste_filename = get_valid_filename(list_to_paste)
+	#get content
+	file_to_copy = open(list_to_copy, "r")
+	content = file_to_copy.read()
+	file_to_copy.close()
+
+	#deleting old file
+	path = os.getcwd() + "/" + list_to_copy
+	os.remove(path)
+
+	#paste content
+	file = open(paste_filename, "w")
+	file.write(content)
+	file.close()
+	return True
+
+def replace_list_in_archive(list_index, new_list_name):
+	archive = open("archive.txt", "r")
+	lists = archive.read().split('\n')
+	lists[int(list_index)-1] = set_entry([get_identifier(list_index), new_list_name]).rstrip('\n')
+	archive.close()
+	archive = open("archive.txt", "w")
+	content = '\n'.join(lists)
+	archive.write(content)
+	archive.close()
+
+
+def clear_list(list_index):
+	filename = get_list_from_archive(list_index)
+	open(filename, "w").close()
+
 
 def get_unique_subscribers(on_both_lists):
 	unique_subscribers = []
@@ -146,3 +208,13 @@ def export(list_index):
 	file = open(json_filename, "w").close()
 	with open(json_filename, "a") as file:
 		file.write(json.dumps(people_on_list, file, sort_keys=True, indent=4))
+
+
+# def remove_list_from_archive(list_index):
+# 	identifier = get_identifier(list_index)
+# 	archive = open("archive.txt", "r")
+# 	content = archive.read().split('\n')
+# 	content.remove(content[int(list_index) - 1])
+# 	archive.close()
+# 	archive = open("archive.txt", "w")
+# 	archive.write(''.join(content))

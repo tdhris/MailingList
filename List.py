@@ -6,6 +6,11 @@ class Person:
 		self.name = name
 		self.email = email
 
+	def change_name(self, new_name):
+		self.name = new_name
+
+	def change_email(self, new_email):
+		self.email = new_email
 
 class List:
 	archive_filename = 'archive.txt'
@@ -24,3 +29,14 @@ class List:
 		identifier = assist_functions.get_identifier(index)
 		entry = assist_functions.set_entry([identifier, self.list_name])
 		assist_functions.write_to_file(self.archive_filename, entry, "a")
+
+	def remove_list_from_archive(self, list_index):
+		identifier = assist_functions.get_identifier(list_index)
+		archive = open("archive.txt", "r")
+		content = archive.read().split('\n')
+		content.remove(content[int(list_index) - 1])
+		archive.close()
+		archive = open("archive.txt", "w")
+		archive.write(''.join(content))
+
+

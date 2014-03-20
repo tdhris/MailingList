@@ -3,7 +3,7 @@ import assist_functions
 
 def process_input(command):
 	if command == 'exit':
-		assist_functions.greet_user()
+		greet_user()
 
 	elif command == 'help':
 		assist_functions.print_list_of_commands()
@@ -25,20 +25,13 @@ def process_input(command):
 		new_list = List.List(list_name)
 
 	elif command.startswith("update_subscriber"):
-		arguments = assist_functions.get_arguments(command, 2)
-		list_index, subscriber_index = arguments[0], arguments[1]
-		updated_person = add_person()
-		assist_functions.update_subscriber_info(list_index, subscriber_index, updated_person)
+		pass
 
 	elif command.startswith("remove_subscriber"):
-		arguments = assist_functions.get_arguments(command, 2)
-		list_index, subscriber_index = arguments[0], arguments[1]
-		assist_functions.remove_subscriber(list_index, subscriber_index)
+		pass
 
 	elif command.startswith("update "):
-		arguments = assist_functions.get_arguments(command, 2)
-		list_index, new_list_name = arguments[0], arguments[1]
-		assist_functions.change_list_name(list_index, new_list_name)
+		pass
 
 	elif command.startswith('search_email'):
 		pass
@@ -51,10 +44,17 @@ def process_input(command):
 	elif command.startswith('export'):
 		list_index = assist_functions.get_arguments(command, 1)
 		assist_functions.export(list_index)
-
+<<<<<<< HEAD
+		
+update_subscriber <unique_list_identifier> <unique_name_identifier>
+* remove_subscriber <unique_list_identifier> <unique_name_identifier>
+ update <unique_list_identifier>  <new_list_name>
+ "import <filename"
+=======
 
 	elif command.startswith("import"):
 		pass
+>>>>>>> Tanya
 
 	else:
 		pass
@@ -72,10 +72,11 @@ def add_person():
 
 def main():
 	assist_functions.greet_user()
+	command = take_input()
 
 	while True:
-		command = take_input()
 		process_input(command)
+		command = take_input()
 
 
 if __name__ == '__main__':
