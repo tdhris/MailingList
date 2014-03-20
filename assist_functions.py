@@ -171,6 +171,3 @@ def search_email(email):
 		for line in archive:
 			if line.startswith(identifier):
 				print (line)
-				break
-			else:
-				print ("List doesn't exist !")
