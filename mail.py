@@ -3,7 +3,7 @@ import assist_functions
 
 def process_input(command):
 	if command == 'exit':
-		greet_user()
+		assist_functions.greet_user()
 
 	elif command == 'help':
 		assist_functions.print_list_of_commands()
@@ -64,11 +64,10 @@ def add_person():
 
 def main():
 	assist_functions.greet_user()
-	command = take_input()
 
 	while True:
-		process_input(command)
 		command = take_input()
+		process_input(command)
 
 
 if __name__ == '__main__':
