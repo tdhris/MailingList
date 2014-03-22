@@ -6,6 +6,11 @@ class Person:
 		self.name = name
 		self.email = email
 
+	def change_name(self, new_name):
+		self.name = new_name
+
+	def change_email(self, new_email):
+		self.email = new_email
 
 class List:
 	archive_filename = 'archive.txt'
@@ -25,4 +30,4 @@ class List:
 		entry = assist_functions.set_entry([identifier, self.list_name])
 		assist_functions.write_to_file(self.archive_filename, entry, "a")
 
-		
+
