@@ -24,3 +24,5 @@ class List:
 		identifier = assist_functions.get_identifier(index)
 		entry = assist_functions.set_entry([identifier, self.list_name])
 		assist_functions.write_to_file(self.archive_filename, entry, "a")
+
+		

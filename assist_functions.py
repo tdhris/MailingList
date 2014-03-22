@@ -34,13 +34,13 @@ def set_entry(list_of_elements):
 
 
 def get_arguments(command, number_of_arguments):
-	arguments = [arg.rstrip('\n') for arg in command.split(' ', number_of_arguments)[1:]]
+	arguments = [arg.rstrip('\n') for arg in command.split(' ', number_of_arguments)][1:]
 	if len(arguments) == 1:
 		return str(arguments[0])
 	else:
 		return arguments
 
-def write_to_file(filename, entry, mode):
+def write_to_file(filename, entry, mode = "w"):
 	file = open(filename, mode)
 	file.write(entry)
 	file.close()
